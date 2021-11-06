@@ -1,0 +1,26 @@
+{
+  "name": "contacts",
+  "version": "1.0.0",
+  "description": "MERN stack app for keeping all professional contacts in one place",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dondurivan/contacts.git"
+  },
+  "author": "Ivan Dondur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dondurivan/contacts/issues"
+  },
+  "homepage": "https://github.com/dondurivan/contacts#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
