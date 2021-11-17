@@ -1,18 +1,31 @@
 const mongoose = require('mongoose')
 const express = require('express')
-const bodyParser = require('body-parser')
 const cors = require('cors')
+const categoriesRouter = require('./routes/categories')
+
 require("dotenv").config();
 
 const url = process.env.MONGODB_URL
 
+const app = express();
+const port = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json())
+
 mongoose.connect(url, { useNewUrlParser: true })
 
-const db = mongoose.connection
-db.once('open', _ => {
+const connection = mongoose.connection
+connection.once('open', _ => {
   console.log('Database connected:', url)
 })
 
-db.on('error', err => {
+connection.on('error', err => {
   console.error('connection error:', err)
+})
+
+app.use('/categories', categoriesRouter)
+
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`)
 })
