@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../../assets/images/logo.svg';
 import { Counter } from '../../features/counter/Counter';
 import axios from 'axios';
 import './HomePage.css';
-
-const images = require.context('../../assets/images/jobs-icons/', true);
 
 interface Category {
   name: string,

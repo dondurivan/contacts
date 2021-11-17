@@ -4,7 +4,7 @@
   "description": "MERN stack app for keeping all professional contacts in one place",
   "main": "server",
   "scripts": {
-    "start": "nodemon server"
+    "start": "nodemon index"
   },
   "repository": {
     "type": "git",
