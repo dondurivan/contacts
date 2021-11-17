@@ -5,3 +5,16 @@
 .Home-image {
   width: 200px;
 }
+
+.Home-list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Home-list-item {
+  cursor: pointer;
+}
+
+.Home-list-item:hover {
+  opacity: .8;
+}

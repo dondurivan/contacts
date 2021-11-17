@@ -1,3 +1,4 @@
+import { ICategory } from './../common/types';
 const { Schema, model } = require("mongoose");
 
 const categorySchema = new Schema({
@@ -10,8 +11,8 @@ const categorySchema = new Schema({
         type: String,
         required: true
     }
+}, {
+    timestamps: true,
 });
 
-const Category = model("Category", categorySchema);
-
-module.exports = Category;
+export default model('Category', categorySchema)

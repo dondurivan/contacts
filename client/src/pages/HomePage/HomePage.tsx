@@ -32,15 +32,20 @@ function HomePage() {
         <Counter /> */}
         <h1>Categories</h1>
       </header>
-      {categories && categories.map(item => {
-        const image = require(`../../assets/images/jobs-icons/${item.image}.svg`).default;
-        return (
-          <div key={item.name}>
-            <h3>{item.name}</h3>
-            <img src={image} className="Home-image" alt={item.name} />
-          </div>
+      <div className="Home-list">
+        {categories && (
+          categories.map(item => {
+            const image = require(`../../assets/images/jobs-icons/${item.image}.svg`).default;
+            return (
+              <div key={item.name} className="Home-list-item">
+                <h3>{item.name}</h3>
+                <img src={image} className="Home-image" alt={item.name} />
+              </div>
+            )}
+          )
         )}
-      )}
+      </div>
+      
     </div>
   );
 }
