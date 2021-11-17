@@ -8,9 +8,9 @@ router.route('/').get((req, res) => [
 ])
 
 router.route('/add').post((req, res) => {
-    const name = req.body.name;
+    const { name, image } = req.body;
 
-    const newCategory = new Category({name});
+    const newCategory = new Category({name, image});
 
     newCategory.save()
         .then(() => res.json('User added'))

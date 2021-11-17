@@ -4,8 +4,11 @@ import { Counter } from '../../features/counter/Counter';
 import axios from 'axios';
 import './HomePage.css';
 
+const images = require.context('../../assets/images/jobs-icons/', true);
+
 interface Category {
-  name: string
+  name: string,
+  image: string
 }
 
 function HomePage() {
@@ -26,16 +29,21 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="Home">
+      <header className="Home-header">
         {/* <img src={logo} className="App-logo" alt="logo" />
         <Counter /> */}
         <h1>Categories</h1>
-        {categories && categories.map(item => (
-          <div key={item.name}>{item.name}</div>
-        ))}
       </header>
-      
+      {categories && categories.map(item => {
+        const image = require(`../../assets/images/jobs-icons/${item.image}.svg`).default;
+        return (
+          <div key={item.name}>
+            <h3>{item.name}</h3>
+            <img src={image} className="Home-image" alt={item.name} />
+          </div>
+        )}
+      )}
     </div>
   );
 }
