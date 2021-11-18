@@ -1,20 +1,20 @@
-.Home {
+.Categories {
   text-align: center;
 }
 
-.Home-image {
+.Categories-image {
   width: 200px;
 }
 
-.Home-list {
+.Categories-list {
   display: flex;
   justify-content: space-evenly;
 }
 
-.Home-list-item {
+.Categories-list-item {
   cursor: pointer;
 }
 
-.Home-list-item:hover {
+.Categories-list-item:hover {
   opacity: .8;
 }

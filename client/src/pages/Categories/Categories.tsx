@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Counter } from '../../features/counter/Counter';
 import axios from 'axios';
-import './HomePage.css';
+import './Categories.css';
 
 interface Category {
   name: string,
   image: string
 }
 
-function HomePage() {
+function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const fetchCategories = async () => {
@@ -26,20 +26,20 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="Home">
-      <header className="Home-header">
+    <div className="Categories">
+      <header className="Categories-header">
         {/* <img src={logo} className="App-logo" alt="logo" />
         <Counter /> */}
         <h1>Categories</h1>
       </header>
-      <div className="Home-list">
+      <div className="Categories-list">
         {categories && (
           categories.map(item => {
             const image = require(`../../assets/images/jobs-icons/${item.image}.svg`).default;
             return (
-              <div key={item.name} className="Home-list-item">
+              <div key={item.name} className="Categories-list-item">
                 <h3>{item.name}</h3>
-                <img src={image} className="Home-image" alt={item.name} />
+                <img src={image} className="Categories-image" alt={item.name} />
               </div>
             )}
           )
@@ -50,4 +50,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Categories;
