@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Counter } from '../../features/counter/Counter';
-import { Box, Button, Modal, Paper } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Button, Modal, Paper } from '@mui/material';
 import CreateCategory from '../../components/CreateCategory/CreateCategory';
 import axios from 'axios';
 import './Categories.css';
@@ -35,6 +34,23 @@ function Categories() {
     console.log(response);
     setCategories(response.data)
   }
+  
+  const addCategory = async (category: Category): Promise<void> => {
+    console.log(category)
+    const response = await axios({
+      url: `${process.env.REACT_APP_API_URL}/categories/add`,
+      method: "post",
+      data: category
+    })
+
+    if (response.status !== 200) {
+      return;
+    }
+  
+    console.log(response);
+    handleClose();
+    await fetchCategories();
+  }
 
   useEffect(() => {
     fetchCategories();
@@ -43,8 +59,6 @@ function Categories() {
   return (
     <div className="Categories">
       <header className="Categories-header">
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <Counter /> */}
         <h1>Categories</h1>
       </header>
       <div className="Categories-list">
@@ -68,7 +82,7 @@ function Categories() {
         aria-describedby="modal-modal-description"
       >
         <Paper elevation={3} sx={style}>
-          <CreateCategory />
+          <CreateCategory handleClose={handleClose} handleCreateCategory={(item: Category): Promise<void> => addCategory(item)} />
         </Paper>
       </Modal>
     </div>

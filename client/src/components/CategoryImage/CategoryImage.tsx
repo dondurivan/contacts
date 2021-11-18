@@ -10,11 +10,11 @@ interface IProps {
 
 const CategoryImage: React.FC<IProps> = props => {
     const {isSelected, image} = props;
-    
+
     return (
         <ImageListItem className="Image-item" onClick={() => props.onClick(image)}>
             <img
-                src={require(`../../assets/images/jobs-icons/${image}`).default}
+                src={require(`../../assets/images/jobs-icons/${image}.svg`).default}
                 alt={image}
                 loading="lazy"
             />
