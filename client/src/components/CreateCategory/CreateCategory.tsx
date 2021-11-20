@@ -5,7 +5,8 @@ import './CreateCategory.css';
 
 interface Category {
     name: string,
-    image: string
+    image: string,
+    _id?: number
 }
 interface IProps {
     handleClose(): void;

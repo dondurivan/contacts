@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Button, Modal, Paper } from '@mui/material';
+import { Link } from "react-router-dom";
+import { Button, Modal, Paper, Grid, Container } from '@mui/material';
+import { experimentalStyled as styled } from '@mui/material/styles';
 import CreateCategory from '../../components/CreateCategory/CreateCategory';
 import axios from 'axios';
 import './Categories.css';
 
 interface Category {
   name: string,
-  image: string
+  image: string,
+  _id: number
 }
 
 const style = {
@@ -17,6 +20,13 @@ const style = {
   width: 500,
   p: 4,
 };
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -58,33 +68,44 @@ function Categories() {
 
   return (
     <div className="Categories">
-      <header className="Categories-header">
-        <h1>Categories</h1>
-      </header>
-      <div className="Categories-list">
-        {categories && (
-          categories.map(item => {
-            const image = require(`../../assets/images/jobs-icons/${item.image}.svg`).default;
-            return (
-              <div key={item.name} className="Categories-list-item">
-                <h3>{item.name}</h3>
-                <img src={image} className="Categories-image" alt={item.name} />
-              </div>
-            )}
-          )
-        )}
-      </div>
-      <Button variant="contained" onClick={handleOpen}>Add new category</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Paper elevation={3} sx={style}>
-          <CreateCategory handleClose={handleClose} handleCreateCategory={(item: Category): Promise<void> => addCategory(item)} />
-        </Paper>
-      </Modal>
+      <Container maxWidth="sm">
+        <header className="Categories-header">
+          <h1>Categories</h1>
+        </header>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          {categories && (
+            categories.map(item => {
+              const image = require(`../../assets/images/jobs-icons/${item.image}.svg`).default;
+              return (
+                <Grid item xs={2} sm={4} md={4} key={item.image}>
+                  <Item>
+                    <Link
+                      to={`/categories/${item._id}`}
+                      key={item.name}
+                    >
+                      <h3>{item.name}</h3>
+                      <img src={image} className="Categories-image" alt={item.name} />
+                    </Link>
+                  </Item>
+                </Grid>
+              )}
+            )
+          )}
+        </Grid>
+        <footer className="Categories-footer">
+          <Button variant="contained" onClick={handleOpen}>Add new category</Button>
+        </footer>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Paper elevation={3} sx={style}>
+            <CreateCategory handleClose={handleClose} handleCreateCategory={(item: Category): Promise<void> => addCategory(item)} />
+          </Paper>
+        </Modal>
+      </Container>
     </div>
   );
 }

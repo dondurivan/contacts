@@ -3,7 +3,7 @@
 }
 
 .Categories-image {
-  width: 200px;
+  width: 100%;
 }
 
 .Categories-list {
@@ -17,4 +17,8 @@
 
 .Categories-list-item:hover {
   opacity: .8;
+}
+
+.Categories-footer {
+  margin: 30px 0;
 }
