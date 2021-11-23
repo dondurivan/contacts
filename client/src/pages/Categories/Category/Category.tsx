@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
-import { Button,  } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { ICategory } from '../types';
 
 const Category = () => {
@@ -34,10 +34,15 @@ const Category = () => {
   }, []);
   return (
     <div>
-      <h2>Category: {category?.name}</h2>
-      <footer className="Categories-footer">
-        <Button variant="contained" onClick={deleteItem}>Delete category</Button>
-      </footer>
+      <Container maxWidth="sm">
+        <header className="Categories-header">
+          <Link to={`/categories`}>Back</Link>
+          <h1>Category: {category?.name}</h1>
+        </header>
+        <footer className="Categories-footer">
+          <Button variant="contained" onClick={deleteItem}>Delete category</Button>
+        </footer>
+      </Container>
     </div>);
 }
 
