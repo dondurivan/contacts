@@ -1,0 +1,8 @@
+.Image-check {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #53cb60;
+    background: #fff;
+    border-top-left-radius: 8px;
+}

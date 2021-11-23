@@ -4,22 +4,8 @@ import { Button, Modal, Paper, Grid, Container } from '@mui/material';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import CreateCategory from '../../components/CreateCategory/CreateCategory';
 import axios from 'axios';
+import { ICategory } from './types';
 import './Categories.css';
-
-interface Category {
-  name: string,
-  image: string,
-  _id: number
-}
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  p: 4,
-};
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -29,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Categories() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => setOpen(true);
@@ -41,11 +27,10 @@ function Categories() {
       method: "get"
     }) 
   
-    console.log(response);
     setCategories(response.data)
   }
   
-  const addCategory = async (category: Category): Promise<void> => {
+  const addCategory = async (category: ICategory): Promise<void> => {
     console.log(category)
     const response = await axios({
       url: `${process.env.REACT_APP_API_URL}/categories/add`,
@@ -56,8 +41,7 @@ function Categories() {
     if (response.status !== 200) {
       return;
     }
-  
-    console.log(response);
+
     handleClose();
     await fetchCategories();
   }
@@ -101,8 +85,8 @@ function Categories() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Paper elevation={3} sx={style}>
-            <CreateCategory handleClose={handleClose} handleCreateCategory={(item: Category): Promise<void> => addCategory(item)} />
+          <Paper elevation={3} className="Categories-paper">
+            <CreateCategory handleClose={handleClose} handleCreateCategory={(item: ICategory): Promise<void> => addCategory(item)} />
           </Paper>
         </Modal>
       </Container>

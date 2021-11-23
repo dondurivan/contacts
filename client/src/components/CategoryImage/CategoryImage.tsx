@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-
+import CheckIcon from '@mui/icons-material/Check';
 import { ImageListItem } from '@mui/material';
+
+import "./CategoryImage.css";
 
 interface IProps {
     image: string;
@@ -18,7 +20,7 @@ const CategoryImage: React.FC<IProps> = props => {
                 alt={image}
                 loading="lazy"
             />
-            {isSelected && <div>aa</div>}
+            {isSelected && <CheckIcon className="Image-check" />}
         </ImageListItem>
     )
 }

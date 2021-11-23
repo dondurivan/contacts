@@ -17,4 +17,14 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('error: ' + err))
 })
 
+router.route('/:id').get((req, res) => {
+    Category.findById(req.params.id)
+        .then((data) => {
+            console.log("data", data);
+            if (!data) throw Error('No category found');
+            res.status(200).json(data);
+        })
+        .catch(err => res.status(400).json('error: ' + err))
+})
+
 module.exports = router;
