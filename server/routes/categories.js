@@ -13,6 +13,18 @@ router.get('/', async (req, res) => {
     }
 })
 
+// Get single category by id
+router.get('/:id', async (req, res) => {
+    try {
+        const item = await Category.findById(req.params.id);
+        if (!item) throw Error('No category found');
+
+        res.status(200).json(item);
+    } catch (e) {
+        res.status(400).json('error: ' + e.message)
+    }
+})
+
 // Add single category
 router.post('/add', async(req, res) => {
     const { name, image } = req.body;
@@ -21,18 +33,6 @@ router.post('/add', async(req, res) => {
     try {
         const item = await newCategory.save();
         if (!item) throw Error('Something went wrong saving the category');
-
-        res.status(200).json(item);
-    } catch (e) {
-        res.status(400).json('error: ' + e.message)
-    }
-})
-
-// Get single category by id
-router.get('/:id', async (req, res) => {
-    try {
-        const item = await Category.findById(req.params.id);
-        if (!item) throw Error('No category found');
 
         res.status(200).json(item);
     } catch (e) {
