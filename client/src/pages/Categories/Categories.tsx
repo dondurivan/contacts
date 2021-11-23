@@ -7,6 +7,15 @@ import axios from 'axios';
 import { ICategory } from './types';
 import './Categories.css';
 
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  p: 4,
+};
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(2),
@@ -85,7 +94,7 @@ function Categories() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Paper elevation={3} className="Categories-paper">
+          <Paper elevation={3} sx={style}>
             <CreateCategory handleClose={handleClose} handleCreateCategory={(item: ICategory): Promise<void> => addCategory(item)} />
           </Paper>
         </Modal>

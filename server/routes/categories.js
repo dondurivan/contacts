@@ -1,30 +1,40 @@
 const router = require('express').Router()
 let Category = require('../models/category.model')
 
-router.route('/').get((req, res) => [
-    Category.find()
-        .then(categories => res.json(categories))
-        .catch(err => res.status(400).json('error: ' + err))
-])
+router.get('/', async (req, res) => {
+    try {
+        const categories = await Category.find();
+        if (!categories) throw Error('No items');
 
-router.route('/add').post((req, res) => {
+        res.status(200).json(categories)
+    } catch (e) {
+        res.status(400).json('error: ' + e.message)
+    }
+})
+
+router.post('/add', async(req, res) => {
     const { name, image } = req.body;
 
     const newCategory = new Category({name, image});
+    try {
+        const item = await newCategory.save();
+        if (!item) throw Error('Something went wrong saving the category');
 
-    newCategory.save()
-        .then(() => res.json('User added'))
-        .catch(err => res.status(400).json('error: ' + err))
+        res.status(200).json(item);
+    } catch (e) {
+        res.status(400).json('error: ' + e.message)
+    }
 })
 
-router.route('/:id').get((req, res) => {
-    Category.findById(req.params.id)
-        .then((data) => {
-            console.log("data", data);
-            if (!data) throw Error('No category found');
-            res.status(200).json(data);
-        })
-        .catch(err => res.status(400).json('error: ' + err))
+router.get('/:id', async (req, res) => {
+    try {
+        const item = await Category.findById(req.params.id);
+        if (!item) throw Error('No category found');
+
+        res.status(200).json(item);
+    } catch (e) {
+        res.status(400).json('error: ' + e.message)
+    }
 })
 
 module.exports = router;
