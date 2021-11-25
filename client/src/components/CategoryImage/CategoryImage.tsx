@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import { ImageListItem } from '@mui/material';
 

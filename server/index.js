@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const cors = require('cors')
 const categoriesRouter = require('./routes/categories')
+const peopleRouter = require('./routes/people')
 
 require("dotenv").config();
 
@@ -25,6 +26,7 @@ connection.on('error', err => {
 })
 
 app.use('/categories', categoriesRouter)
+app.use('/people', peopleRouter)
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`)
